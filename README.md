@@ -94,6 +94,10 @@ To build an interactive graphic for the web, try:
 
 * [D3](http://d3js.org/)
 
+### Tutorials 
+
+* [Bureau of Labor Statistics FAQ](http://www.bls.gov/help/hlpform1.htm)
+
 ### Files in the repository
 
 There are some data files extracted in the above manner sitting in the [data](https://github.com/syntagmatic/labor-statistics/tree/master/data) folder, as well as [graphs](https://github.com/syntagmatic/labor-statistics/tree/master/graphs). I plan to add starting points for interactive graphics as well to the repository.
