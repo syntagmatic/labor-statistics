@@ -1,5 +1,3 @@
-Total CPI for all urban consumers 1947-2912 - CUSR0000SA0
-
 # What can I use this data for?
 
 The [Bureau of Labor Statistics](http://en.wikipedia.org/wiki/Bureau_of_Labor_Statistics) is a federal agency of the U.S. government tasked with fact-finding about [labour economics](http://en.wikipedia.org/wiki/Labor_economics) within the U.S.
@@ -56,9 +54,11 @@ Click *include graphs* then the little blue *Go* button.
 
 You should see a graph like the following following:
 
+```
   Series Id:  APU0000FL2101
   Area:       U.S. city average
   Item:       Lettuce, romaine, per lb. (453.6 gm)
+```
 
 [![lettuce graph](https://github.com/syntagmatic/labor-statistics/raw/master/graphs/lettuce.gif)](#lettuce)
 
@@ -74,7 +74,9 @@ Click *Retrive Data*
 
 You'll be returned to a page, which may or may not have a graph. You should see a block of numbers and commas with no spaces, with columns: 
  
+```
   Year,Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec,Annual,
+```
 
 The last few columns may be a bit different.
 
@@ -91,3 +93,10 @@ The [CSV](http://en.wikipedia.org/wiki/Comma-separated_values) file is compatibl
 To build an interactive graphic for the web, try:
 
 * [D3](http://d3js.org/)
+
+### Files in the repository
+
+There are some data files extracted in the above manner sitting in the [data](https://github.com/syntagmatic/labor-statistics/tree/master/data) folder, as well as [graphs](https://github.com/syntagmatic/labor-statistics/tree/master/graphs). I plan to add starting points for interactive graphics as well to the repository.
+
+* Total CPI for all urban consumers 1947-2912 - CUSR0000SA0
+
