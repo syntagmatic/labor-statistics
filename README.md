@@ -61,7 +61,6 @@ You should see a graph like the following following:
 ```
 
 [![lettuce graph](https://github.com/syntagmatic/labor-statistics/raw/master/graphs/lettuce.gif)](#lettuce)
-
 ### Export a CSV
 
 Click *More Formatting Options*
