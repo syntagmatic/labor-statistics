@@ -22,7 +22,7 @@ Let's get the *average price* of *romaine lettuce* for *U.S. cities*.
 
 ### Start your search
 
-the *Average Price Data* row, click *Multi-Screen Data Search*
+In the *Average Price Data* row, click *Multi-Screen Data Search*
 
 ### Pick a region
 
