@@ -14,7 +14,7 @@ You'll have to access the data yourself. The following tutorial will tell you ho
 
 Okay. You're convinced. The Bureau of Labor Statistics can help you understand the U.S. economy by getting the facts about price histories in the U.S. market. 
 
-In a few minutes, you'll have not only a simple visualization for a single commodity, but a data file you can combine with others to do your own analysis or make an interactive graphic.
+In the next couple minutes, you will create a simple visualization for a commodity, and a data file you can use to do your own analysis or make an interactive graphic.
 
 Go to the [BLS Database](http://www.bls.gov/data/) section and pick a database.
 
