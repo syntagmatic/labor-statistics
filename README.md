@@ -95,6 +95,7 @@ To build an interactive graphic for the web, try:
 
 ### Tutorials 
 
+* [Create Customized Tables](http://www.bls.gov/tutorial/multi_screen/html_version.htm) - similar to the above tutorial with pictures.
 * [Bureau of Labor Statistics FAQ](http://www.bls.gov/help/hlpform1.htm)
 
 ### Files in the repository
