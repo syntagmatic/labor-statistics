@@ -2,7 +2,7 @@
 
 The [Bureau of Labor Statistics](http://en.wikipedia.org/wiki/Bureau_of_Labor_Statistics) is the federal agency of the United States government tasked with fact-finding about [labour economics](http://en.wikipedia.org/wiki/Labor_economics) within the U.S.
 
-The data is used as a measure of [regional inflation](http://en.wikipedia.org/wiki/Inflation#Measures) for the U.S.
+The data is used as a measure of [regional inflation](http://en.wikipedia.org/wiki/Inflation#Measures), among other uses.
 
 For a graphic of of how different prices from the consumer database are weighted to construct the [Consumer Price Index](http://en.wikipedia.org/wiki/Consumer_price_index), see [All of Inflation's Little Parts](http://www.nytimes.com/interactive/2008/05/03/business/20080403_SPENDING_GRAPHIC.html).
 
