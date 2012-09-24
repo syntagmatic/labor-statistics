@@ -1,0 +1,142 @@
+<!doctype html>
+<style>
+body {
+  font: 10px sans-serif;
+}
+
+.rule line,
+.yrule line {
+  stroke: #eee;
+  shape-rendering: crispEdges;
+}
+
+.rule line.axis,
+.yrule line.axis {
+  stroke: #000;
+}
+
+.line {
+  fill: none;
+  stroke: #bbb;
+  stroke-width: 1px;
+}
+
+circle.line {
+  fill: #fff;
+}
+</style>
+<h1>Chicken Breast vs Ground Beef</h1>
+<p>This chart is in development.</p>
+<h3 id="circle-date"></h3>
+<script src="lib/underscore.js"></script>
+<script src="lib/d3.v2.js"></script>
+<script src="js/utils.js"></script>
+<script>
+var margin = {top: 20, right: 20, bottom: 20, left: 20},
+    width = 650 - margin.left - margin.right,
+    height = 325 - margin.top - margin.bottom,
+    xscale = d3.scale.linear().range([0,width]),
+    yscale = d3.scale.linear().range([height,0]);
+
+var data, data_b, dates;
+
+var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+d3.csv("../data/chicken_breast.csv", function(bananas) {
+  d3.csv("../data/ground_beef.csv", function(lettuce) {
+    /*
+    var min_year = d3.min(years),
+        max_year = d3.max(years),
+        min_month = _(months).find(function(m) { return raw[0][m] != undefined; }),
+        max_month = _(months).find(function(m,i) { return raw[raw.length-1][months[i+1]] == " "; });  // following month has no value
+    */
+
+    data = date_value(bananas);
+    data_b = date_value(lettuce);
+
+    xscale.domain([0.95*d3.min(_.pluck(data, 'value')), 1.05*d3.max(_.pluck(data, 'value'))]);
+    yscale.domain([0.95*d3.min(_.pluck(data_b, 'value')), 1.05*d3.max(_.pluck(data_b, 'value'))]);
+
+    dates = _.intersection( _.pluck(data, "date"), _.pluck(data_b, "date"));
+
+    var data = _(dates)
+      .map(function(date) {
+        return {
+          date: date,
+          a: _(data).find(function(d) { return d.date == date}).value,
+          b: _(data_b).find(function(d) { return d.date == date}).value
+        }
+      });
+
+    var svg = d3.select("body")
+        .data([data])
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    var rules = svg.selectAll("g.rule")
+        .data(xscale.ticks(10))
+      .enter().append("svg:g")
+        .attr("class", "rule");
+
+    rules.append("svg:line")
+        .attr("x1", xscale)
+        .attr("x2", xscale)
+        .attr("y1", 0)
+        .attr("y2", height - 1);
+
+    rules.append("svg:text")
+        .attr("x", xscale)
+        .attr("y", height + 3)
+        .attr("dy", ".71em")
+        .attr("text-anchor", "middle")
+        .text(xscale.tickFormat(10));
+
+    var yrules = svg.selectAll("g.yrule")
+        .data(yscale.ticks(10))
+      .enter().append("svg:g")
+        .attr("class", "yrule");
+
+    yrules.append("svg:line")
+        .attr("class", function(d) { return d ? null : "axis"; })
+        .attr("y1", yscale)
+        .attr("y2", yscale)
+        .attr("x1", 0)
+        .attr("x2", width + 1);
+
+    yrules.append("svg:text")
+        .attr("y", yscale)
+        .attr("x", -3)
+        .attr("dy", ".35em")
+        .attr("text-anchor", "end")
+        .text(yscale.tickFormat(10));
+
+    svg.selectAll("path")
+        .data([data])
+        .enter().append("svg:path")
+        .attr("class", "line")
+        .attr("d", d3.svg.line()
+        .x(function(d) { return xscale(d.a); })
+        .y(function(d) { return yscale(d.b); }));
+
+
+    svg.append("circle")
+        .attr("cx", xscale(data[0].a))
+        .attr("cy", yscale(data[0].b))
+        .attr("r", 4);
+
+    _(dates).each(function(date,i) {
+      setTimeout(function() {
+        var d = new Date(date);
+        d3.select("#circle-date").text(months[d.getMonth()] + " " + d.getFullYear());
+        svg.select("circle")
+           .transition().duration(120) 
+           .attr("cx", xscale(data[i].a))
+           .attr("cy", yscale(data[i].b));
+      }, 120*i);
+    });
+  });
+});
+</script>
