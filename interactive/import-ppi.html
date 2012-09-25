@@ -17,7 +17,7 @@ body {
 
 .line {
   fill: none;
-  stroke: #bbb;
+  stroke: #368;
   stroke-width: 1px;
 }
 
@@ -42,6 +42,7 @@ Pick a file prefixed with <strong>nd.data</strong> from the <a href="ftp://ftp.b
 <script src="lib/underscore.string.js"></script>
 <script src="lib/d3.v2.js"></script>
 <script src="js/utils.js"></script>
+<script src="js/sparkchart.js"></script>
 <script>
 var data, products, series;
 var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -125,6 +126,10 @@ function create_table(raw_data) {
     .enter().append("th")
       .text(function(d) { return d; });
 
+  table.select("tr")
+    .append("th")
+      .text("spark chart");
+
   table.selectAll("tr.row")
       .data(series_stats)
     .enter().append("tr")
@@ -133,6 +138,11 @@ function create_table(raw_data) {
       .data(function(d) { return series_keys.map(function(key) { return d[key] }) ; })
       .enter().append("td")
         .text(function(d) { return d; });
+
+  table.selectAll("tr.row")
+      .each(function(d,i,j) {
+        d3.select(this).data([series_data[d.series_id]]).call(sparkchart);
+      });
 };
 });
 });
