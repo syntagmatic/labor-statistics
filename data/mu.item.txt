@@ -1,0 +1,376 @@
+item_code	item_name
+AA0	All items                                                                                           	
+AA0R	Purchasing power of the consumer dollar                                                             	
+SA0	All items                                                                                           	
+SA0E	Energy                                                                                              	
+SA0L1	All items less food                                                                                 	
+SA0L12	All items less food and shelter                                                                     	
+SA0L12E	All items less food, shelter, and energy                                                            	
+SA0L12E4	All items less food, shelter, energy, and used cars                                                 	
+SA0L1E	All items less food and energy                                                                      	
+SA0L2	All items less shelter                                                                              	
+SA0L22	All items less homeowners' costs                                                                    	
+SA0L5	All items less medical care                                                                         	
+SA0LE	All items less energy                                                                               	
+SA0R	Purchasing power of the consumer dollar                                                             	
+SA1	Food and beverages                                                                                  	
+SA11	Food                                                                                                	
+SA111	Food at home                                                                                        	
+SA1111	Cereals and bakery products                                                                         	
+SA1112	Meats, poultry, fish, and eggs                                                                      	
+SA11121	Meats, poultry, and fish                                                                            	
+SA111211	Meats                                                                                               	
+SA1113	Dairy products                                                                                      	
+SA1114	Fruits and vegetables                                                                               	
+SA11141	Fresh fruits and vegetables                                                                         	
+SA11142	Processed fruits and vegetables                                                                     	
+SA1115	Other food at home                                                                                  	
+SA2	Housing                                                                                             	
+SA21	Shelter                                                                                             	
+SA211	Renters' costs                                                                                      	
+SA2112	Other renters' costs                                                                                	
+SA213	Household maintenance and repairs                                                                   	
+SA22	Fuel and other utilities                                                                            	
+SA221	Fuels                                                                                               	
+SA23	Household furnishings and operation                                                                 	
+SA231	Housefurnishings                                                                                    	
+SA2313	Appliances, including electronic equipment                                                          	
+SA3	Apparel and upkeep                                                                                  	
+SA31	Apparel commodities                                                                                 	
+SA311	Apparel commodities less footwear                                                                   	
+SA3111	Men's and boys' apparel                                                                             	
+SA3112	Women's and girls' apparel                                                                          	
+SA3114	Other apparel commodities                                                                           	
+SA4	Transportation                                                                                      	
+SA41	Private transportation                                                                              	
+SA415	Other private transportation                                                                        	
+SA4151	Other private transportation commodities                                                            	
+SA4152	Other private transportation services                                                               	
+SA5	Medical care                                                                                        	
+SA51	Medical care commodities                                                                            	
+SA512	Medical care services                                                                               	
+SA6	Entertainment                                                                                       	
+SA61	Entertainment commodities                                                                           	
+SA7	Other goods and services                                                                            	
+SA712	Personal care                                                                                       	
+SA713	Personal and educational expenses                                                                   	
+SA7132	Personal and educational services                                                                   	
+SAC	Commodities                                                                                         	
+SACE	Energy commodities                                                                                  	
+SACL1	Commodities less food                                                                               	
+SACL11	Commodities less food and beverages                                                                 	
+SACL1E	Commodities less food and energy commodities                                                        	
+SACL1E4	Commodities less food, energy commodities, and used cars                                            	
+SAD	Durables                                                                                            	
+SAN	Nondurables                                                                                         	
+SAN1D	Domestically produced farm food                                                                     	
+SAN1S	Selected beef cuts                                                                                  	
+SANL1	Nondurables less food                                                                               	
+SANL11	Nondurables less food and beverages                                                                 	
+SANL113	Nondurables less food, beverages and apparel                                                        	
+SANL13	Nondurables less food and apparel                                                                   	
+SAS	Services                                                                                            	
+SAS22	Housekeeping and home maintenance services                                                          	
+SAS24	Utilities and public transportation                                                                 	
+SAS2LSRS	Household services less rent of shelter                                                             	
+SAS2RS	Rent of shelter                                                                                     	
+SAS367	Other services                                                                                      	
+SAS4	Transportation services                                                                             	
+SASL2RS	Services less rent of shelter                                                                       	
+SASL5	Services less medical care services                                                                 	
+SASLE	Services less energy services                                                                       	
+SE01	Cereals and cereal products                                                                         	
+SE0101	Flour and prepared flour mixes                                                                      	
+SE0102	Cereal                                                                                              	
+SE0103	Rice, pasta, and cornmeal                                                                           	
+SE02	Bakery products                                                                                     	
+SE0201	White bread                                                                                         	
+SE0202	Fresh other bread, biscuits, rolls, and muffins                                                     	
+SE0204	Cookies, fresh cakes, and cupcakes                                                                  	
+SE0206	Other bakery products                                                                               	
+SE03	Beef and veal                                                                                       	
+SE0301	Ground beef other than canned                                                                       	
+SE0302	Chuck roast                                                                                         	
+SE0303	Round roast                                                                                         	
+SE0304	Other beef and veal                                                                                 	
+SE0305	Round steak                                                                                         	
+SE0306	Sirloin steak                                                                                       	
+SE04	Pork                                                                                                	
+SE0401	Bacon                                                                                               	
+SE0402	Pork chops                                                                                          	
+SE0403	Ham                                                                                                 	
+SE0404	Other pork, including sausage                                                                       	
+SE05	Other meats                                                                                         	
+SE06	Poultry                                                                                             	
+SE0601	Fresh whole chicken                                                                                 	
+SE0602	Fresh and frozen chicken parts                                                                      	
+SE0603	Other poultry                                                                                       	
+SE07	Fish and seafood                                                                                    	
+SE0701	Canned fish and seafood                                                                             	
+SE0702	Fresh and frozen fish and seafood                                                                   	
+SE08	Eggs                                                                                                	
+SE09	Fresh milk and cream                                                                                	
+SE0901	Fresh whole milk                                                                                    	
+SE0902	Other fresh milk and cream                                                                          	
+SE10	Processed dairy products                                                                            	
+SE1001	Other dairy products, including butter                                                              	
+SE1002	Cheese                                                                                              	
+SE1004	Ice cream and related products                                                                      	
+SE11	Fresh fruits                                                                                        	
+SE1101	Apples                                                                                              	
+SE1102	Bananas                                                                                             	
+SE1103	Oranges, including tangerines                                                                       	
+SE1104	Other fresh fruits                                                                                  	
+SE12	Fresh vegetables                                                                                    	
+SE1201	Potatoes                                                                                            	
+SE1202	Lettuce                                                                                             	
+SE1203	Tomatoes                                                                                            	
+SE1204	Other fresh vegetables                                                                              	
+SE13	Processed fruits                                                                                    	
+SE1301	Fruit juices and frozen fruit                                                                       	
+SE1303	Canned and dried fruits                                                                             	
+SE14	Processed vegetables                                                                                	
+SE1401	Frozen vegetables                                                                                   	
+SE1402	Other processed vegetables                                                                          	
+SE15	Sugar and sweets                                                                                    	
+SE1501	Sweets, including candy                                                                             	
+SE1502	Sugar and artificial sweeteners                                                                     	
+SE16	Fats and oils                                                                                       	
+SE17	Nonalcoholic beverages                                                                              	
+SE1701	Carbonated drinks                                                                                   	
+SE1703	Coffee                                                                                              	
+SE1705	Other noncarbonated drinks                                                                          	
+SE18	Other prepared food                                                                                 	
+SE1801	Canned and packaged soup                                                                            	
+SE1802	Frozen prepared food                                                                                	
+SE1803	Snacks                                                                                              	
+SE1804	Seasonings, condiments, sauces, and spices                                                          	
+SE1806	Miscellaneous prepared food, including baby food                                                    	
+SE19	Food away from home                                                                                 	
+SE1901	Lunch                                                                                               	
+SE1902	Dinner                                                                                              	
+SE1903	Other meals and snacks                                                                              	
+SE20	Alcoholic beverages                                                                                 	
+SE2001	Beer and ale at home                                                                                	
+SE2002	Distilled spirits at home                                                                           	
+SE2003	Wine at home                                                                                        	
+SE2005	Alcoholic beverages away from home                                                                  	
+SE200A	Alcoholic beverages at home                                                                         	
+SE2101	Rent, residential                                                                                   	
+SE2102	Lodging while out of town                                                                           	
+SE2103	Lodging while at school                                                                             	
+SE22	Homeowners' costs                                                                                   	
+SE2201	Owners' equivalent rent                                                                             	
+SE2202	Household insurance                                                                                 	
+SE23	Household maintenance and repair services                                                           	
+SE24	Household maintenance and repair commodities                                                        	
+SE2401	Materials, supplies, and equipment for home repairs                                                 	
+SE2404	Other household maintenance and repair commodities                                                  	
+SE25	Fuel oil and other household fuel commodities                                                       	
+SE2501	Fuel oil                                                                                            	
+SE2502	Other household fuel commodities                                                                    	
+SE26	Gas (piped) and electricity (energy services)                                                       	
+SE2601	Electricity                                                                                         	
+SE2602	Utility (piped) gas                                                                                 	
+SE27	Other utilities and public services                                                                 	
+SE2701	Telephone, local charges                                                                            	
+SE2702	Water and sewerage maintenance                                                                      	
+SE2703	Cable television                                                                                    	
+SE2704	Refuse collection                                                                                   	
+SE2705	Telephone, interstate toll calls                                                                    	
+SE2706	Telephone, intrastate toll calls                                                                    	
+SE270A	Telephone services                                                                                  	
+SE28	Textile housefurnishings                                                                            	
+SE29	Furniture and bedding                                                                               	
+SE2901	Bedroom furniture                                                                                   	
+SE2902	Sofas                                                                                               	
+SE2903	Living room chairs and tables                                                                       	
+SE2904	Other furniture                                                                                     	
+SE30	Major household appliances                                                                          	
+SE3001	Refrigerators and home freezers                                                                     	
+SE3002	Laundry equipment                                                                                   	
+SE3003	Stoves, ovens, dishwashers, and air conditioners                                                    	
+SE31	Video and audio products                                                                            	
+SE3101	Televisions                                                                                         	
+SE3102	Video products other than televisions                                                               	
+SE3103	Audio products                                                                                      	
+SE32	Other housefurnishings                                                                              	
+SE3201	Floor and window coverings, infants', laundry, cleaning, and                                        	
+SE3202	Clocks, lamps, and decor items                                                                      	
+SE3203	Tableware, serving pieces, and nonelectric kitchenware                                              	
+SE3204	Lawn equipment, power tools, and other hardware                                                     	
+SE3205	Sewing, floor cleaning, small kitchen, and portable heating                                         	
+SE3206	Indoor plants and fresh cut flowers                                                                 	
+SE33	Housekeeping supplies                                                                               	
+SE3301	Laundry and cleaning products, including soap                                                       	
+SE3303	Household paper products and stationery supplies                                                    	
+SE3305	Other household, lawn, and garden supplies                                                          	
+SE34	Housekeeping services                                                                               	
+SE3401	Postage                                                                                             	
+SE3404	Gardening and other household services                                                              	
+SE3406	Appliance and furniture repair                                                                      	
+SE35	Tenants' insurance                                                                                  	
+SE36	Men's apparel                                                                                       	
+SE3601	Men's suits, sport coats, coats, and jackets                                                        	
+SE3603	Men's furnishings and special clothing                                                              	
+SE3604	Men's shirts                                                                                        	
+SE3605	Men's dungarees, jeans, and trousers                                                                	
+SE37	Boys' apparel                                                                                       	
+SE38	Women's  apparel                                                                                    	
+SE3801	Women's coats and jackets                                                                           	
+SE3802	Women's dresses                                                                                     	
+SE3803	Women's separates and sportswear                                                                    	
+SE3804	Women's underwear, nightwear, hosiery, and accessories                                              	
+SE3805	Women's suits                                                                                       	
+SE39	Girls' apparel                                                                                      	
+SE40	Footwear                                                                                            	
+SE4001	Men's footwear                                                                                      	
+SE4002	Boys' and girls' footwear                                                                           	
+SE4003	Women's footwear                                                                                    	
+SE41	Infants' and toddlers' apparel                                                                      	
+SE42	Sewing materials, notions, and luggage                                                              	
+SE43	Watches and jewelry                                                                                 	
+SE4301	Watches                                                                                             	
+SE4302	Jewelry                                                                                             	
+SE44	Apparel services                                                                                    	
+SE4401	Other apparel services                                                                              	
+SE4402	Laundry and dry cleaning other than coin operated                                                   	
+SE45	New vehicles                                                                                        	
+SE4501	New cars                                                                                            	
+SE4502	New trucks                                                                                          	
+SE4503	New motorcycles                                                                                     	
+SE46	Used cars                                                                                           	
+SE47	Motor fuel, motor oil, coolant, and other products                                                  	
+SE4701	Motor fuel                                                                                          	
+SE4702	Motor oil, coolant, and other products                                                              	
+SE48	Automobile parts and equipment                                                                      	
+SE4801	Tires                                                                                               	
+SE4802	Other automobile parts and equipment                                                                	
+SE49	Automobile maintenance and repairs                                                                  	
+SE4901	Automobile body work                                                                                	
+SE4902	Automobile drive train, brake, and miscellaneous mechanical                                         	
+SE4903	Automobile maintenance and servicing                                                                	
+SE4904	Automobile power plant repair                                                                       	
+SE50	Automobile insurance                                                                                	
+SE51	Automobile finance charges                                                                          	
+SE52	Automobile fees                                                                                     	
+SE5201	Automobile registration, licensing, and inspection fees                                             	
+SE5205	Other automobile-related fees                                                                       	
+SE53	Public transportation                                                                               	
+SE5301	Airline fares                                                                                       	
+SE5302	Other intercity public transportation                                                               	
+SE5303	Intracity public transportation                                                                     	
+SE54	Prescription drugs                                                                                  	
+SE55	Nonprescription drugs and medical supplies                                                          	
+SE5502	Internal and respiratory over-the-counter drugs                                                     	
+SE5503	Nonprescription medical equipment and supplies                                                      	
+SE56	Professional medical services                                                                       	
+SE5601	Physicians' services                                                                                	
+SE5602	Dental services                                                                                     	
+SE5603	Eye care                                                                                            	
+SE5604	Services by other medical professionals                                                             	
+SE57	Hospital and related services                                                                       	
+SE5701	Hospital room                                                                                       	
+SE5702	Other inpatient hospital services                                                                   	
+SE5703	Outpatient services                                                                                 	
+SE5704	Hospital services                                                                                   	
+SE570R	Nursing home services                                                                               	
+SE59	Reading materials                                                                                   	
+SE5901	Newspapers                                                                                          	
+SE5902	Magazines, periodicals, and books                                                                   	
+SE60	Sporting goods and equipment                                                                        	
+SE6001	Sport vehicles, including bicycles                                                                  	
+SE6002	Other sporting goods                                                                                	
+SE61	Toys, hobbies, and other entertainment                                                              	
+SE6101	Toys, hobbies, and music equipment                                                                  	
+SE6102	Photographic supplies and equipment                                                                 	
+SE6103	Pet supplies and expense                                                                            	
+SE62	Entertainment services                                                                              	
+SE6201	Club memberships                                                                                    	
+SE6202	Fees for participant sports, excl club memberships                                                  	
+SE6203	Admissions                                                                                          	
+SE6204	Fees for lessons or instructions                                                                    	
+SE6205	Other entertainment services                                                                        	
+SE63	Tobacco and smoking products                                                                        	
+SE64	Toilet goods and personal care appliances                                                           	
+SE6401	Other toilet goods and small personal care appliances, inclu                                        	
+SE6403	Cosmetics, bath and nail preparations, manicure and eye make                                        	
+SE65	Personal care services                                                                              	
+SE6501	Beauty parlor services for females                                                                  	
+SE6502	Haircuts and other barber shop services for males                                                   	
+SE66	School books and supplies                                                                           	
+SE67	Tuition and other school fees                                                                       	
+SE6701	College tuition                                                                                     	
+SE6702	Elementary and high school tuition                                                                  	
+SE6703	Daycare and nursery school                                                                          	
+SE68	Personal expenses                                                                                   	
+SE6801	Legal service fees                                                                                  	
+SE6802	Personal financial services                                                                         	
+SE6803	Funeral expenses                                                                                    	
+SE69	Information processing equipment                                                                    	
+SEED01	Land-line telephone services, local charges                                                         	
+SEED02	Land-line telephone services, long distance charges                                                 	
+SEGD06	Care of invalids and elderly at home                                                                	
+SEMA	Prescription drugs                                                                                  	
+SEMB	Nonprescription drugs and medical supplies                                                          	
+SEMB01	Internal and respiratory over-the-counter drugs                                                     	
+SEMB02	Nonprescription medical equipment and supplies                                                      	
+SS02021	Other breads                                                                                        	
+SS02022	Fresh biscuits, rolls, and muffins                                                                  	
+SS02041	Fresh cakes and cupcakes                                                                            	
+SS02042	Cookies                                                                                             	
+SS02063	Fresh sweetrolls, coffeecakes, and donuts                                                           	
+SS0206A	Crackers, bread, and cracker products                                                               	
+SS0206B	Frozen and refrigerated bakery products, pies, tarts, and tu                                        	
+SS04031	Ham excl canned                                                                                     	
+SS04041	Other pork                                                                                          	
+SS04042	Pork sausage                                                                                        	
+SS05011	Frankfurters                                                                                        	
+SS05012	Bologna, liverwurst, and salami                                                                     	
+SS05013	Other lunchmeats                                                                                    	
+SS05014	Lamb and organ meats                                                                                	
+SS10011	Butter                                                                                              	
+SS10012	Other dairy products                                                                                	
+SS13013	Other fruit juices                                                                                  	
+SS1301A	Frozen fruit and fruit juices                                                                       	
+SS14023	Other processed vegetables                                                                          	
+SS1402A	Cut corn, canned beans excl lima beans                                                              	
+SS15011	Candy and chewing gum                                                                               	
+SS15012	Other sweets                                                                                        	
+SS16011	Margarine                                                                                           	
+SS16012	Other fats, oils, salad dressing                                                                    	
+SS1601A	Nondairy substitutes and peanut butter                                                              	
+SS17031	Roasted coffee                                                                                      	
+SS17032	Instant and freeze dried coffee                                                                     	
+SS1804A	Seasonings, olives, pickles, and relish                                                             	
+SS1804B	Other condiments                                                                                    	
+SS18063	Other canned and packaged prepared foods                                                            	
+SS1806A	Miscellaneous prepared foods and baby foods                                                         	
+SS20021	Whiskey at home                                                                                     	
+SS20022	Other alcoholic beverages at home                                                                   	
+SS2801A	Household linens                                                                                    	
+SS2801B	Curtains, drapes, slipcovers, and sewing materials                                                  	
+SS33011	Soaps and detergents                                                                                	
+SS33012	Other laundry and cleaning products                                                                 	
+SS33031	Cleansing and toilet tissues, paper towels, and napkins                                             	
+SS33032	Stationery, stationery supplies, and gift wrap                                                      	
+SS36013	Men's coats and jackets                                                                             	
+SS3601A	Men's suits, sport coats and jackets                                                                	
+SS37016	Boys' suits, trousers, sportcoats, and jackets                                                      	
+SS3701A	Boys' coats, jackets, sweaters and shirts                                                           	
+SS3901A	Girls' coats, jackets, dresses and suits                                                            	
+SS3901B	Girls' separates and sportswear                                                                     	
+SS450111	Subcompact new cars                                                                                 	
+SS450112	Compact new cars                                                                                    	
+SS450113	Intermediate new cars                                                                               	
+SS450114	Full-size new cars                                                                                  	
+SS450115	Luxury new cars                                                                                     	
+SS47012	Gasoline, leaded regular                                                                            	
+SS47014	Gasoline, unleaded regular                                                                          	
+SS47015	Gasoline, unleaded midgrade                                                                         	
+SS47016	Gasoline, unleaded premium                                                                          	
+SS4701A	Gasoline, all types                                                                                 	
+SS52011	State automobile registration                                                                       	
+SS5702	Inpatient hospital services                                                                         	
+SS5703	Outpatient hospital services                                                                        	
+SS6401A	Products for hair, hair pieces, and wigs.                                                           	

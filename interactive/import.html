@@ -1,0 +1,129 @@
+<!doctype html>
+<style>
+body {
+  font: 15px sans-serif;
+}
+
+.rule line,
+.yrule line {
+  stroke: #eee;
+  shape-rendering: crispEdges;
+}
+
+.rule line.axis,
+.yrule line.axis {
+  stroke: #000;
+}
+
+.line {
+  fill: none;
+  stroke: #bbb;
+  stroke-width: 1px;
+}
+
+circle.line {
+  fill: #fff;
+}
+</style>
+<h1>Consumer Price Index</h1>
+<p>
+  <a href="ftp://ftp.bls.gov/pub/time.series/mu/Mu.txt">Description</a> -
+  <a href="ftp://ftp.bls.gov/pub/time.series/mu">Data</a>
+</p>
+<p>
+This table joins <a href="ftp://ftp.bls.gov/pub/time.series/mu/mu.item">item codes</a> and <a href="ftp://ftp.bls.gov/pub/time.series/mu/mu.series">time series descritions</a> to a time series dataset.
+</p>
+<p>
+Pick a file prefixed with "mu.data" from the <a href="ftp://ftp.bls.gov/pub/time.series/mu">data listing</a> and upload it here to see a summary of the series within that dataset.
+</p>
+<input type="file" id="uploader" value="Upload Time Series" disabled></input>
+<script src="lib/underscore.js"></script>
+<script src="lib/underscore.math.js"></script>
+<script src="lib/underscore.string.js"></script>
+<script src="lib/d3.v2.js"></script>
+<script src="js/utils.js"></script>
+<script>
+var data, items, series;
+var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+d3.tsv("../data/mu.series.txt", function(raw_series) {
+d3.tsv("../data/mu.item.txt", function(raw_items) {
+utils.upload_tsv("uploader", create_table);
+d3.select("#uploader").attr("disabled", null);
+
+function create_table(raw_data) {
+
+  /**************
+  * Preprocessing
+  **************/
+  
+  // trim whitespace
+  data = utils.trim_table(raw_data);
+  items = utils.trim_table(raw_items);
+  series = utils.trim_table(raw_series);
+
+  // items lookup
+  items = {};
+  _(raw_items).each(function(d) {
+    items[d['item_code']] = d['item_name'];
+  });
+
+  // series lookup
+  series= {};
+  _(raw_series).each(function(d) {
+    series[d['series_id']] = d;
+  });
+
+  series_data = d3.nest()
+    .key(function(d) { return d['series_id']; })
+    .map(data);
+
+  /**************
+  * Stats
+  **************/
+
+  series_stats = _(series_data).chain()
+    .keys()
+    .map(function(k) {
+      return {
+        series_id: k,
+        item_code: series[k].item_code,
+        item: items[series[k].item_code],
+        length: series_data[k].length,
+        begin_year: series[k].begin_year,
+        end_year: series[k].end_year,
+        begin_period: series[k].begin_period,
+        end_period: series[k].end_period,
+      }
+    })
+    .sortBy(function(d) { return -d.length })
+    .value();
+
+  var series_keys = _.keys(series_stats[0]);
+
+  /**************
+  * Readout
+  **************/
+
+  var table = d3.select("body")
+    .append("table")
+
+  table.append("tr")
+    .attr("class","fixed")
+    .selectAll("th")
+    .data(series_keys)
+    .enter().append("th")
+      .text(function(d) { return d; });
+
+  table.selectAll("tr.row")
+      .data(series_stats)
+    .enter().append("tr")
+      .attr("class", "row")
+      .selectAll("td")
+      .data(function(d) { return series_keys.map(function(key) { return d[key] }) ; })
+      .enter().append("td")
+        .text(function(d) { return d; });
+};
+});
+});
+</script>

@@ -1,3 +1,5 @@
+var utils = {};
+
 function date_value(data) {
   var years = _.pluck(data, "Year");
 
@@ -15,4 +17,30 @@ function date_value(data) {
       return d.value == " ";
     })
     .value();
+};
+
+utils.trim_table = function(table) { 
+  return _(table).map(function(d) { 
+    for (k in d)
+      d[k] = _.str.trim(d[k]);
+    return d;
+  });
+};
+
+utils.upload_tsv = function(elem_id, callback) {
+  var uploader = document.getElementById(elem_id);  
+  var reader = new FileReader();
+
+  reader.onload = function(e) {
+    var contents = e.target.result;
+    var data = d3.tsv.parse(contents);
+    callback(data);
+  };
+
+  uploader.addEventListener("change", handleFiles, false);  
+
+  function handleFiles() {
+    var file = this.files[0];
+    reader.readAsText(file);
+  };
 };
