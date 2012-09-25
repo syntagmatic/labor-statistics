@@ -1,7 +1,7 @@
 function sparkchart(selection) {
   var margin = {top: 0, right: 0, bottom: 0, left: 0},
       width = 120 - margin.left - margin.right,
-      height = 32 - margin.top - margin.bottom,
+      height = 24 - margin.top - margin.bottom,
       xscale = d3.scale.linear().range([0,width]),
       yscale = d3.scale.linear().range([height,0]);
 
@@ -14,7 +14,7 @@ function sparkchart(selection) {
   });
 
   xscale.domain([0, data.length-1]);
-  yscale.domain([0.95*d3.min(_.pluck(data, 'value')), 1.05*d3.max(_.pluck(data, 'value'))]);
+  yscale.domain([d3.min(_.pluck(data, 'value')), d3.max(_.pluck(data, 'value'))]);
 
   var svg = selection.append("svg")
       .attr("width", width + margin.left + margin.right)
