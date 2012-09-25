@@ -1,6 +1,6 @@
 var utils = {};
 
-function date_value(data) {
+utils.date_value = function(data) {
   var years = _.pluck(data, "Year");
 
   return _(years).chain()

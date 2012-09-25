@@ -48,8 +48,8 @@ d3.csv("../data/bananas.csv", function(bananas) {
         max_month = _(months).find(function(m,i) { return raw[raw.length-1][months[i+1]] == " "; });  // following month has no value
     */
 
-    var data = date_value(lettuce);
-    var data_b = date_value(bananas);
+    var data = utils.date_value(lettuce);
+    var data_b = utils.date_value(bananas);
 
     xscale.domain([data[0].date, data[data.length-1].date]);
     yscale.domain([0.95*d3.min(_.pluck(data_b, 'value')), 1.05*d3.max(_.pluck(data, 'value'))]);
