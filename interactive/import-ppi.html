@@ -8,6 +8,7 @@ html, body {
 
 body {
   font: 16px sans-serif;
+  line-height: 1.3em;
 }
 
 #content {
@@ -40,6 +41,12 @@ circle.line {
   fill: #fff;
 }
 
+.intro {
+  background: #f3f3f3;
+  border: 1px solid #d0d0d0;
+  padding: 0 12px;
+}
+
 </style>
 <script src="lib/underscore.js"></script>
 <script src="lib/underscore.math.js"></script>
@@ -50,20 +57,24 @@ circle.line {
 <body>
 <div id="content">
   <h1>Producer Price Index Drag & Drop Upload</h1>
-  <p>
-    <a href="ftp://ftp.bls.gov/pub/time.series/nd/nd.txt">Description</a> -
-    <a href="ftp://ftp.bls.gov/pub/time.series/nd">Data</a>
-  </p>
-  <p>
-  For use with <strong>nd.data</strong> files from the Bureau of Labor Statistics.
-  </p>
-  <p>
-  Drag and drop files onto this page to load a table for that dataset.
-  </p>
+  <div class="intro">
+    <p>
+      <a href="ftp://ftp.bls.gov/pub/time.series/nd/nd.txt">Description</a> -
+      <a href="ftp://ftp.bls.gov/pub/time.series/nd">Data</a>
+    </p>
+    <p>
+    For use with <strong>nd.data</strong> files from the Bureau of Labor Statistics, such as <a href="ftp://ftp.bls.gov/pub/time.series/nd/nd.data.19.Machinery">nd.data.19.Machinery</a>.<br/>
+    Download files individually, or use this command to download the entire directory:
+    </p>
+    <code>wget -r ftp://ftp.bls.gov/pub/time.series/nd</code>
+    <p>
+    Drag and drop files onto this page to load a table for that dataset.
+    </p>
+  </div>
 </div>
 </body>
 <script>
-var columns = ["product", "industry", "begin_year", "end_year", "sparkchart"];
+var columns = ["product", "industry", "observations", "begin_year", "end_year", "sparkchart"];
 
 var data, products, series;
 var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -121,7 +132,7 @@ function create_table(raw_data, name) {
         product: products[series[k].product_code],
         //industry_code: series[k].industry_code,
         industry: industries[series[k].industry_code],
-        //length: series_data[k].length,
+        observations: series_data[k].length,
         begin_year: series[k].begin_year,
         end_year: series[k].end_year,
         //begin_period: series[k].begin_period,
@@ -156,7 +167,7 @@ function create_table(raw_data, name) {
     .enter().append("tr")
       .attr("class", "row")
       .selectAll("td")
-      .data(function(d) { return columns.slice(0,4).map(function(key) { return d[key] }) ; })
+      .data(function(d) { return columns.slice(0,5).map(function(key) { return d[key] }) ; })
       .enter().append("td")
         .text(function(d) { return d; });
 
