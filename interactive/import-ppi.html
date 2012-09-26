@@ -59,14 +59,14 @@ circle.line {
   <h1>Producer Price Index Drag & Drop Upload</h1>
   <div class="intro">
     <p>
-      <a href="ftp://ftp.bls.gov/pub/time.series/nd/nd.txt">Description</a> -
-      <a href="ftp://ftp.bls.gov/pub/time.series/nd">Data</a>
+      <a href="ftp://ftp.bls.gov/pub/time.series/pc/pc.txt">Description</a> -
+      <a href="ftp://ftp.bls.gov/pub/time.series/pc">Data</a>
     </p>
     <p>
-    For use with <strong>nd.data</strong> files from the Bureau of Labor Statistics, such as <a href="ftp://ftp.bls.gov/pub/time.series/nd/nd.data.19.Machinery">nd.data.19.Machinery</a>.<br/>
+    For use with <strong>pc.data</strong> files from the Bureau of Labor Statistics, such as <a href="ftp://ftp.bls.gov/pub/time.series/pc/pc.data.19.Machinery">pc.data.19.Machinery</a>.<br/>
     Download files individually, or use this command to download the entire directory:
     </p>
-    <code>wget -r ftp://ftp.bls.gov/pub/time.series/nd</code>
+    <code>wget -r ftp://ftp.bls.gov/pub/time.series/pc</code>
     <p>
     Drag and drop files onto this page to load a table for that dataset.
     </p>
@@ -79,9 +79,9 @@ var columns = ["product", "industry", "observations", "begin_year", "end_year", 
 var data, products, series;
 var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-d3.tsv("../data/nd.series.txt", function(raw_series) {
-d3.tsv("../data/nd.product.txt", function(raw_products) {
-d3.tsv("../data/nd.industry.txt", function(raw_industries) {
+d3.tsv("../data/pc.series", function(raw_series) {
+d3.tsv("../data/pc.product", function(raw_products) {
+d3.tsv("../data/pc.industry", function(raw_industries) {
 utils.upload_tsv(create_table);
 d3.select("#uploader").attr("disabled", null);
 
