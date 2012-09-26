@@ -27,20 +27,51 @@ utils.trim_table = function(table) {
   });
 };
 
-utils.upload_tsv = function(elem_id, callback) {
-  var uploader = document.getElementById(elem_id);  
-  var reader = new FileReader();
+// requires file input "uploader" and "dropbox" for drag and drop
+utils.upload_tsv = function(callback) {
+  function handleFiles() {
+    
+    _(this.files).each(function(file) {
+      var reader = new FileReader();
+      var loading_msg = d3.select("#content")
+        .append("div")
+        .attr("class", "loading-msg")
+        .text("loading...");
 
-  reader.onload = function(e) {
-    var contents = e.target.result;
-    var data = d3.tsv.parse(contents);
-    callback(data);
+      reader.onload = function(e) {
+        var contents = e.target.result;
+        var data = d3.tsv.parse(contents);
+        callback(data, file.name);
+        loading_msg.remove();
+      };
+
+      reader.readAsText(file);
+    });
   };
 
-  uploader.addEventListener("change", handleFiles, false);  
+  var dropbox;
+   
+  dropbox = document.body;
+  dropbox.addEventListener("dragenter", dragenter, false);
+  dropbox.addEventListener("dragover", dragover, false);
+  dropbox.addEventListener("drop", drop, false);
 
-  function handleFiles() {
-    var file = this.files[0];
-    reader.readAsText(file);
+  function drop(e) {
+    e.stopPropagation();
+    e.preventDefault();
+   
+    var dt = e.dataTransfer;
+    handleFiles.call(dt);
+  };
+
+  function dragenter(e) {
+    e.stopPropagation();
+    e.preventDefault();
+  };
+
+  function dragover(e) {
+    e.stopPropagation();
+    e.preventDefault();
   };
 };
+

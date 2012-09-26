@@ -1,7 +1,22 @@
 <!doctype html>
 <style>
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
 body {
-  font: 12px sans-serif;
+  font: 16px sans-serif;
+}
+
+#content {
+  width: 980px;
+  margin: 0 auto;
+}
+
+.loading-msg {
+  font-weight: bold;
 }
 
 .rule line,
@@ -24,36 +39,42 @@ body {
 circle.line {
   fill: #fff;
 }
+
 </style>
-<h1>Producer Price Index Upload</h1>
-<p>
-  <a href="ftp://ftp.bls.gov/pub/time.series/nd/nd.txt">Description</a> -
-  <a href="ftp://ftp.bls.gov/pub/time.series/nd">Data</a>
-</p>
-<p>
-This table joins <a href="ftp://ftp.bls.gov/pub/time.series/nd/nd.product">product codes</a> and <a href="ftp://ftp.bls.gov/pub/time.series/nd/nd.series">time series descritions</a> to a time series dataset.
-</p>
-<p>
-Pick a file prefixed with <strong>nd.data</strong> from the <a href="ftp://ftp.bls.gov/pub/time.series/nd">data listing</a> and upload it here to see a summary of the series within that dataset.
-</p>
-<input type="file" id="uploader" value="Upload Time Series" disabled></input>
 <script src="lib/underscore.js"></script>
 <script src="lib/underscore.math.js"></script>
 <script src="lib/underscore.string.js"></script>
 <script src="lib/d3.v2.js"></script>
-<script src="js/utils.js"></script>
 <script src="js/sparkchart.js"></script>
+<script src="js/utils.js"></script>
+<body>
+<div id="content">
+  <h1>Producer Price Index Drag & Drop Upload</h1>
+  <p>
+    <a href="ftp://ftp.bls.gov/pub/time.series/nd/nd.txt">Description</a> -
+    <a href="ftp://ftp.bls.gov/pub/time.series/nd">Data</a>
+  </p>
+  <p>
+  For use with <strong>nd.data</strong> files from the Bureau of Labor Statistics.
+  </p>
+  <p>
+  Drag and drop files onto this page to load a table for that dataset.
+  </p>
+</div>
+</body>
 <script>
+var columns = ["product", "industry", "begin_year", "end_year", "sparkchart"];
+
 var data, products, series;
 var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 d3.tsv("../data/nd.series.txt", function(raw_series) {
 d3.tsv("../data/nd.product.txt", function(raw_products) {
 d3.tsv("../data/nd.industry.txt", function(raw_industries) {
-utils.upload_tsv("uploader", create_table);
+utils.upload_tsv(create_table);
 d3.select("#uploader").attr("disabled", null);
 
-function create_table(raw_data) {
+function create_table(raw_data, name) {
 
   /**************
   * Preprocessing
@@ -96,15 +117,15 @@ function create_table(raw_data) {
     .map(function(k) {
       return {
         series_id: k,
-        product_code: series[k].product_code,
+        //product_code: series[k].product_code,
         product: products[series[k].product_code],
-        industry_code: series[k].industry_code,
+        //industry_code: series[k].industry_code,
         industry: industries[series[k].industry_code],
-        length: series_data[k].length,
+        //length: series_data[k].length,
         begin_year: series[k].begin_year,
         end_year: series[k].end_year,
-        begin_period: series[k].begin_period,
-        end_period: series[k].end_period,
+        //begin_period: series[k].begin_period,
+        //end_period: series[k].end_period,
       }
     })
     .sortBy(function(d) { return -d.length })
@@ -116,26 +137,26 @@ function create_table(raw_data) {
   * Readout
   **************/
 
-  var table = d3.select("body")
+  d3.select("#content")
+    .append("h2")
+    .text(name);
+
+  var table = d3.select("#content")
     .append("table")
 
   table.append("tr")
     .attr("class","fixed")
     .selectAll("th")
-    .data(series_keys)
+    .data(columns)
     .enter().append("th")
       .text(function(d) { return d; });
-
-  table.select("tr")
-    .append("th")
-      .text("spark chart");
 
   table.selectAll("tr.row")
       .data(series_stats)
     .enter().append("tr")
       .attr("class", "row")
       .selectAll("td")
-      .data(function(d) { return series_keys.map(function(key) { return d[key] }) ; })
+      .data(function(d) { return columns.slice(0,4).map(function(key) { return d[key] }) ; })
       .enter().append("td")
         .text(function(d) { return d; });
 

@@ -1,7 +1,7 @@
 function sparkchart(selection) {
-  var margin = {top: 0, right: 0, bottom: 0, left: 0},
-      width = 120 - margin.left - margin.right,
-      height = 24 - margin.top - margin.bottom,
+  var margin = {top: 1, right: 1, bottom: 1, left: 1},
+      width = 160 - margin.left - margin.right,
+      height = 32 - margin.top - margin.bottom,
       xscale = d3.scale.linear().range([0,width]),
       yscale = d3.scale.linear().range([height,0]);
 
