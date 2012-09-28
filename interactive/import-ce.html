@@ -1,0 +1,192 @@
+<!doctype html>
+<style>
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font: 16px sans-serif;
+  line-height: 1.3em;
+}
+
+#content {
+  width: 980px;
+  margin: 0 auto;
+}
+
+.loading-msg {
+  font-weight: bold;
+}
+
+.rule line,
+.yrule line {
+  stroke: #eee;
+  shape-rendering: crispEdges;
+}
+
+.rule line.axis,
+.yrule line.axis {
+  stroke: #000;
+}
+
+.line {
+  fill: none;
+  stroke: #368;
+  stroke-width: 1px;
+}
+
+circle.line {
+  fill: #fff;
+}
+
+.intro {
+  background: #f3f3f3;
+  border: 1px solid #d0d0d0;
+  padding: 0 12px;
+}
+
+</style>
+<script src="lib/underscore.js"></script>
+<script src="lib/underscore.math.js"></script>
+<script src="lib/underscore.string.js"></script>
+<script src="lib/d3.v2.js"></script>
+<script src="js/sparkchart.js"></script>
+<script src="js/utils.js"></script>
+<body>
+<div id="content">
+  <h1>Employment, Hours and Earnings Viewer</h1>
+  <div class="intro">
+    <p>
+      <a href="ftp://ftp.bls.gov/pub/time.series/ce/ce.txt">Description</a> -
+      <a href="ftp://ftp.bls.gov/pub/time.series/ce">Data</a>
+    </p>
+    <p>
+    For use with <strong>ce.data</strong> files from the Bureau of Labor Statistics, such as <a href="ftp://ftp.bls.gov/pub/time.series/ce/ce.data.19.Machinery">ce.data.17.GovtAECurr</a>.<br/>
+    Download files individually, or use this command to download the entire directory:
+    </p>
+    <code>wget -r ftp://ftp.bls.gov/pub/time.series/ce</code>
+    <p>
+    Drag and drop files onto this page to load a table for that dataset.
+    </p>
+  </div>
+</div>
+</body>
+<script>
+var columns = ["supersector", "industry", "datatype", "observations", "begin_year", "end_year", "sparkchart"];
+
+var data, supersectors, series;
+var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+d3.tsv("../data/ce.series", function(raw_series) {
+d3.tsv("../data/ce.supersector", function(raw_supersectors) {
+d3.tsv("../data/ce.industry", function(raw_industries) {
+d3.tsv("../data/ce.datatype", function(raw_datatypes) {
+utils.upload_tsv(create_table);
+d3.select("#uploader").attr("disabled", null);
+
+function create_table(raw_data, name) {
+
+  /**************
+  * Preprocessing
+  **************/
+  
+  // trim whitespace
+  data = utils.trim_table(raw_data);
+  series = utils.trim_table(raw_series);
+  supersectors = utils.trim_table(raw_supersectors);
+  datatypes = utils.trim_table(raw_datatypes);
+  industries= utils.trim_table(raw_industries);
+
+  // supersectors lookup
+  supersectors = {};
+  _(raw_supersectors).each(function(d) {
+    supersectors[d['supersector_code']] = d['supersector_name'];
+  });
+
+  // industry lookup
+  industries = {};
+  _(raw_industries).each(function(d) {
+    industries[d['industry_code']] = d['industry_name'];
+  });
+
+  // datatype lookup
+  datatypes = {};
+  _(raw_datatypes).each(function(d) {
+    datatypes[d['data_type_code']] = d['data_type_text'];
+  });
+
+  // series lookup
+  series= {};
+  _(raw_series).each(function(d) {
+    series[d['series_id']] = d;
+  });
+
+  series_data = d3.nest()
+    .key(function(d) { return d['series_id']; })
+    .map(data);
+
+  /**************
+  * Stats
+  **************/
+
+  series_stats = _(series_data).chain()
+    .keys()
+    .map(function(k) {
+      return {
+        series_id: k,
+        //supersector_code: series[k].supersector_code,
+        supersector: supersectors[series[k].supersector_code],
+        datatype: datatypes[series[k].data_type_code],
+        //industry_code: series[k].industry_code,
+        industry: industries[series[k].industry_code],
+        observations: series_data[k].length,
+        begin_year: series[k].begin_year,
+        end_year: series[k].end_year,
+        //begin_period: series[k].begin_period,
+        //end_period: series[k].end_period,
+      }
+    })
+    .sortBy(function(d) { return -d.length })
+    .value();
+
+  var series_keys = _.keys(series_stats[0]);
+
+  /**************
+  * Readout
+  **************/
+
+  d3.select("#content")
+    .append("h2")
+    .text(name);
+
+  var table = d3.select("#content")
+    .append("table")
+
+  table.append("tr")
+    .attr("class","fixed")
+    .selectAll("th")
+    .data(columns)
+    .enter().append("th")
+      .text(function(d) { return d; });
+
+  table.selectAll("tr.row")
+      .data(series_stats)
+    .enter().append("tr")
+      .attr("class", "row")
+      .selectAll("td")
+      .data(function(d) { return columns.slice(0,6).map(function(key) { return d[key] }) ; })
+      .enter().append("td")
+        .text(function(d) { return d; });
+
+  table.selectAll("tr.row")
+      .each(function(d,i,j) {
+        d3.select(this).data([series_data[d.series_id]]).call(sparkchart);
+      });
+};
+});
+});
+});
+});
+</script>
