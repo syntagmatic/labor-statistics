@@ -56,17 +56,17 @@ circle.line {
 <script src="js/utils.js"></script>
 <body>
 <div id="content">
-  <h1>Employment, Hours and Earnings Viewer</h1>
+  <h1>Producer Price Index Drag & Drop Upload</h1>
   <div class="intro">
     <p>
-      <a href="ftp://ftp.bls.gov/pub/time.series/ce/ce.txt">Description</a> -
-      <a href="ftp://ftp.bls.gov/pub/time.series/ce">Data</a>
+      <a href="ftp://ftp.bls.gov/pub/time.series/pc/pc.txt">Description</a> -
+      <a href="ftp://ftp.bls.gov/pub/time.series/pc">Data</a>
     </p>
     <p>
-    For use with <strong>ce.data</strong> files from the Bureau of Labor Statistics, such as <a href="ftp://ftp.bls.gov/pub/time.series/ce/ce.data.17.GovtAECurr">ce.data.17.GovtAECurr</a>.<br/>
+    For use with <strong>pc.data</strong> files from the Bureau of Labor Statistics, such as <a href="ftp://ftp.bls.gov/pub/time.series/pc/pc.data.19.Machinery">pc.data.19.Machinery</a>.<br/>
     Download files individually, or use this command to download the entire directory:
     </p>
-    <code>wget -r ftp://ftp.bls.gov/pub/time.series/ce</code>
+    <code>wget -r ftp://ftp.bls.gov/pub/time.series/pc</code>
     <p>
     Drag and drop files onto this page to load a table for that dataset.
     </p>
@@ -74,15 +74,14 @@ circle.line {
 </div>
 </body>
 <script>
-var columns = ["supersector", "industry", "datatype", "observations", "begin_year", "end_year", "sparkchart"];
+var columns = ["product", "industry", "observations", "begin_year", "end_year", "sparkchart"];
 
-var data, supersectors, series;
+var data, products, series;
 var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-d3.tsv("../data/ce.series", function(raw_series) {
-d3.tsv("../data/ce.supersector", function(raw_supersectors) {
-d3.tsv("../data/ce.industry", function(raw_industries) {
-d3.tsv("../data/ce.datatype", function(raw_datatypes) {
+d3.tsv("../data/pc.series", function(raw_series) {
+d3.tsv("../data/pc.product", function(raw_products) {
+d3.tsv("../data/pc.industry", function(raw_industries) {
 utils.upload_tsv(create_table);
 d3.select("#uploader").attr("disabled", null);
 
@@ -95,26 +94,19 @@ function create_table(raw_data, name) {
   // trim whitespace
   data = utils.trim_table(raw_data);
   series = utils.trim_table(raw_series);
-  supersectors = utils.trim_table(raw_supersectors);
-  datatypes = utils.trim_table(raw_datatypes);
+  products = utils.trim_table(raw_products);
   industries= utils.trim_table(raw_industries);
 
-  // supersectors lookup
-  supersectors = {};
-  _(raw_supersectors).each(function(d) {
-    supersectors[d['supersector_code']] = d['supersector_name'];
+  // products lookup
+  products = {};
+  _(raw_products).each(function(d) {
+    products[d['product_code']] = d['product_name'];
   });
 
   // industry lookup
   industries = {};
   _(raw_industries).each(function(d) {
     industries[d['industry_code']] = d['industry_name'];
-  });
-
-  // datatype lookup
-  datatypes = {};
-  _(raw_datatypes).each(function(d) {
-    datatypes[d['data_type_code']] = d['data_type_text'];
   });
 
   // series lookup
@@ -136,9 +128,8 @@ function create_table(raw_data, name) {
     .map(function(k) {
       return {
         series_id: k,
-        //supersector_code: series[k].supersector_code,
-        supersector: supersectors[series[k].supersector_code],
-        datatype: datatypes[series[k].data_type_code],
+        //product_code: series[k].product_code,
+        product: products[series[k].product_code],
         //industry_code: series[k].industry_code,
         industry: industries[series[k].industry_code],
         observations: series_data[k].length,
@@ -176,7 +167,7 @@ function create_table(raw_data, name) {
     .enter().append("tr")
       .attr("class", "row")
       .selectAll("td")
-      .data(function(d) { return columns.slice(0,6).map(function(key) { return d[key] }) ; })
+      .data(function(d) { return columns.slice(0,5).map(function(key) { return d[key] }) ; })
       .enter().append("td")
         .text(function(d) { return d; });
 
@@ -185,7 +176,6 @@ function create_table(raw_data, name) {
         d3.select(this).data([series_data[d.series_id]]).call(sparkchart);
       });
 };
-});
 });
 });
 });
