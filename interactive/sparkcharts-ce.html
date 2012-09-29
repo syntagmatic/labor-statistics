@@ -37,6 +37,10 @@ body {
   stroke-width: 1px;
 }
 
+.multiple:hover .line {
+  stroke: #821;
+}
+
 circle.line {
   fill: #fff;
 }
@@ -52,14 +56,23 @@ circle.line {
   font-size: 10px;
   line-height: 11px;
   padding: 0 18px 18px 0;
-  color: transparent;
+  color: #fff;
   width: 140px;
   height: 36px;
   position: relative;
+  font-weight: bold;
+  transition: color 1.5s linear 1s;
+  -moz-transition: color 1.5s linear 1s; /* Firefox 4 */
+  -webkit-transition: color 1.5s linear 1s; /* Safari and Chrome */
+  -o-transition: color 1.5s linear 1s; /* Opera */
 }
 
 .multiple:hover {
-  color: #555;
+  color: #444;
+  transition: color 0s;
+  -moz-transition: color 0s; /* Firefox 4 */
+  -webkit-transition: color 0s; /* Safari and Chrome */
+  -o-transition: color 0s; /* Opera */
 }
 
 .multiple svg {
