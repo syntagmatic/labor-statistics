@@ -1,0 +1,222 @@
+{
+  "ap": {
+    "name": "Average Price Data",
+    "codes": ["area", "item", "footnote"]
+  },
+  "bd": {
+    "name": "Business Employment Dynamics",
+    "codes": ["msa", "state", "county", "industry", "unitanalysis", "dataelement", "sizeclass", "dataclass", "ratelevel", "periodicity", "ownership"]
+  },
+  "bg": {
+    "name": "Collective Bargaining Series - State and Local Government",
+    "codes": ["measure", "unit", "alteration", "sector"]
+  },
+  "bp": {
+    "name": "Collective Bargaining Series - Private Sector",
+    "codes": ["measure", "unit", "periodicity" "alteration", "industry"]
+  },
+  "cc": {
+    "name": "Employer Costs for Employee Compensation",
+    "codes": ["sector", "benefit", "industryocc", "costfactor", "footnote"]
+  },
+  "cd": {
+    "name": "Occupational Injuries and Illness - Characteristics Data (SIC)",
+    "codes": ["category", "datatype", "case", "age", "los", "race", "gender", "pob", "event", "source", "occupation", "nature", "industry", "footnote"]
+  },
+  "ce": {
+    "name": "Employment, Hours, and Earnings - National (NAICS)",
+    "codes": ["supersector", "industry", "data_type"]
+  },
+  "cf": {
+    "name": "Census of Fatal Occupational Injuries (1992-2002)",
+    "codes": ["category", "datatype", "case", "industry", "event", "source", "occupation", "footnote"]
+  },
+  "ch": {
+    "name": "Nonfatal cases involving days away from work: selected characteristics ",
+    "codes": ["category", "datatype", "case", "age", "los", "race", "gender", "pob", "event", "source", "occupation", "nature", "industry", "time", "hour", "weekday", "special", "ownership", "state"]
+  },
+  "ci": {
+    "name": "Employment Cost Index (NAICS)",
+    "codes": ["sector", "comp", "industryocc", "periodicity"]
+  },
+  "cm": {
+    "name": "Employer Costs for Employee Compensation (NAICS)",
+    "codes": ["sector", "benefit", "industryocc", "costfactor"]
+  },
+  "cu": {
+    "name": "Consumer Price Index - All Urban Consumers",
+    "codes": ["area", "item", "periodicity", "base"]
+  },
+  "cw": {
+    "name": "Consumer Price Index - Urban Wage Earners and Clerical Workers",
+    "codes": ["area", "item", "periodicity", "base"]
+  },
+  "cx": {
+    "name": "Consumer Expenditure Data",
+    "codes": ["item", "table", "column", "periodicity"]
+  },
+  "eb": {
+    "name": "Employee Benefits Survey",
+    "codes": ["title", "type"]
+  },
+  "ec": {
+    "name": "Employement Cost Index",
+    "codes": ["comp", "group", "ownership", "periodicity"]
+  },
+  "ee": {
+    "name": "Employment, Hours, and Earnings - National",
+    "codes": ["industry", "data_type"]
+  },
+  "ei": {
+    "name": "International Price Index",
+    "codes": ["index"]
+  },
+  "fi": {
+    "name": "Census of Fatal Occupational Injuries",
+    "codes": ["category", "datatype", "case", "industry", "event", "source", "occupation", "area"]
+  },
+  "fm": {
+    "name": "Marital and family labor force statistics from the Current Population Survey",
+    "codes": ["fchld", "fdat", "fhlf", "fnmatwk", "fnme", "fnmlf", "fnmu", "fnmws", "forig", "frace", "ftpt", "ftyp", "hhlf", "misclf", "prlf", "chld", "lfst", "mari", "orig", "race", "sexs", "tdat", "wkst"]
+  },
+  "fw": {
+    "name": "Census of Fatal Occupational Injuries",
+    "codes": ["category", "datatype", "case", "industry", "event", "source", "occupation", "area"]
+  },
+  "gg": {
+    "name": "Green Goods and Services",
+    "codes": ["periodicity", "area", "industry", "altenergy", "own", "size", "dataelement", "greenquartile", "ratelevel"]
+  },
+  "gp": {
+    "name": "Geographic Profile",
+    "codes": ["area_type", "state", "area", "size", "labor_force", "charact"]
+  },
+  "hc": {
+    "name": "Occupational Injuries and Illness - Characteristics Data (NAICS)",
+    "codes": ["category", "datatype", "case", "age", "los", "race", "gender", "pob", "event", "source", "occupation", "nature", "industry", "footnote"]
+  },
+  "hs": {
+    "name": "Occupational Injuries and Illness Incidences Rate Data",
+    "codes": ["division", "industry", "data_type", "case_type"]
+  },
+  "ii": {
+    "name": "Occupational Injuries and Illness Industry Data",
+    "codes": ["supersector", "industry", "data_type", "case_type", "area"]
+  },
+  "in": {
+    "name": "International Labor Statistics",
+    "codes": ["group", "country", "suffix"]
+  },
+  "ip": {
+    "name": "Industry Productivity and Costs",
+    "codes": ["sector", "industry", "measure", "duration"]
+  },
+  "jl": {
+    "name": "Job Openings and Labor Turnover Survey (SIC)",
+    "codes": ["industry", "region", "dataelement", "ratelevel"]
+  },
+  "jt": {
+    "name": "Job Openings and Labor Turnover Survey (NAICS)",
+    "codes": ["industry", "region", "dataelement", "ratelevel"]
+  },
+  "la": {
+    "name": "Local Area Unemployment Statistics",
+    "codes": ["area_type", "area", "measure", "srd"]
+  },
+  "le": {
+    "name": "Current Population Survey Earnings",
+    "codes": ["lfst", "fips", "tdata", "pcts", "earn", "class", "unin", "indy", "occupation", "education", "ages", "race", "orig", "sexs", "born"]
+  },
+  "li": {
+    "name": "Department Store Inventory Price Index",
+    "codes": ["area", "item", "periodicity"]
+  },
+  "ln": {
+    "name": "Labor Force Statistics from the Population Survey (NAICS)",
+    "codes": ["lfst", "periodicity", "absn", "activity", "ages", "class", "duration", "education", "entr", "expr", "hheader", "hour", "indy", "jdes", "look", "mari", "mjhs", "occupation", "orig", "pcts", "race", "rjnw", "rnlf", "rwns", "seek", "sexs", "tdat", "vets", "wkst", "born", "chld", "disa"]
+  },
+  "lu": {
+    "name": "Current Population Survey Union",
+    "codes": ["lfst", "fips", "tdata", "pcts", "earn", "class", "unin", "indy", "occupation", "education", "ages", "race", "orig", "sexs"]
+  },
+  "ml": {
+    "name": "Mass Layoff Statistics",
+    "codes": ["dataseries", "src", "industryb", "irc", "dataelement"]
+  },
+  "mp": {
+    "name": "Major Sector Multifactor Productivity",
+    "codes": ["sector", "measure", "duration"]
+  },
+  "mu": {
+    "name": "Consumer Price Index - All Urban Consumers (Old Series)",
+    "codes": ["area", "item", "periodicity", "base"]
+  },
+  "mw": {
+    "name": "Consumer Price Index - Urban Wage Earners and Clerical Workers (Old Series)",
+    "codes": ["area", "item", "periodicity", "base"]
+  },
+  "nb": {
+    "name": "National Compensation Survey",
+    "codes": ["ownership", "estimate", "industry", "occupation", "subcell", "datatype", "provision"]
+  },
+  "nc": {
+    "name": "National Compensation Survey (SIC)",
+    "codes": ["state", "area", "mog", "occupation", "level"]
+  },
+  "nd": {
+    "name": "Producer Price Index (NAICS)",
+    "codes": ["industry", "product"]
+  },
+  "nw": {
+    "name": "National Compensation Survey (NAICS)",
+    "codes": ["state", "area", "ownserhip", "estimate_id", "industry", "soc", "subcell_id", "datatype_id", "level"]
+  },
+  "oe": {
+    "name": "Occupation Employment Statistics",
+    "codes": ["areatype", "area", "industry", "occupation", "datatype"]
+  },
+  "pc": {
+    "name": "Producer Price Index",
+    "codes": ["industry", "product"]
+  },
+  "pd": {
+    "name": "Producer Price Index - Discontinued Series (NAICS)",
+    "codes": ["industry", "product"]
+  },
+  "pr": {
+    "name": "Major Sector Productivity and Costs",
+    "codes": ["sector", "class", "measure", "duration"]
+  },
+  "sa": {
+    "name": "State and Area Employment, Hours and Earnings (SIC)",
+    "codes": ["state", "area", "industry", "detail", "data_type"]
+  },
+  "sh": {
+    "name": "Occupational Injuries and Illness Incidences Rate Data (SIC)",
+    "codes": ["division", "industry", "data_type", "case_type"]
+  },
+  "si": {
+    "name": "Occupational Injuries and Illness Incidences Rate Data (2002 data)",
+    "codes": ["division", "industry", "data_type", "case_type"]
+  },
+  "sm": {
+    "name": "State and Area Employment, Hours and Earnings (NAICS)",
+    "codes": ["state", "area", "supersector", "industry", "data_type"]
+  },
+  "su": {
+    "name": "Chained CPI - All Urban Consumers",
+    "codes": ["area", "item", "periodicity", "base"]
+  },
+  "wd": {
+    "name": "Producer Price Index - Commodity Data - Discontinued Series",
+    "codes": ["group", "item"]
+  },
+  "wp": {
+    "name": "Producer Price Index - Commodities",
+    "codes": ["group", "item"]
+  },
+  "ws": {
+    "name": "Work Stoppage Data",
+    "codes": ["measure"]
+  }
+}
