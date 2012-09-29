@@ -13,7 +13,7 @@
   },
   "bp": {
     "name": "Collective Bargaining Series - Private Sector",
-    "codes": ["measure", "unit", "periodicity" "alteration", "industry"]
+    "codes": ["measure", "unit", "periodicity", "alteration", "industry"]
   },
   "cc": {
     "name": "Employer Costs for Employee Compensation",

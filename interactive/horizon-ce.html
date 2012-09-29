@@ -4,6 +4,7 @@ html, body {
   width: 100%;
   height: 100%;
   margin: 0;
+  padding: 0;
 }
 
 body {
@@ -12,8 +13,7 @@ body {
 }
 
 #content {
-  width: 980px;
-  margin: 0 auto;
+  margin: 0 20px;
 }
 
 .loading-msg {
@@ -47,29 +47,40 @@ circle.line {
   padding: 0 12px;
 }
 
+.multiple { 
+  float: left;
+  font-size: 10px;
+  line-height: 11px;
+  padding: 0 18px 18px 0;
+  color: transparent;
+  width: 140px;
+  height: 36px;
+  position: relative;
+}
+
+.multiple:hover {
+  color: #555;
+}
+
+.multiple svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 </style>
 <script src="lib/underscore.js"></script>
 <script src="lib/underscore.math.js"></script>
 <script src="lib/underscore.string.js"></script>
 <script src="lib/d3.v2.js"></script>
-<script src="lib/horizon.js"></script>
 <script src="js/sparkchart.js"></script>
 <script src="js/utils.js"></script>
 <body>
 <div id="content">
-  <h1>Employment, Hours and Earnings Viewer</h1>
+  <h1>Sparkchart Grid</h1>
   <div class="intro">
     <p>
-      <a href="ftp://ftp.bls.gov/pub/time.series/ce/ce.txt">Description</a> -
-      <a href="ftp://ftp.bls.gov/pub/time.series/ce">Data</a>
-    </p>
-    <p>
-    For use with <strong>ce.data</strong> files from the Bureau of Labor Statistics, such as <a href="ftp://ftp.bls.gov/pub/time.series/ce/ce.data.17.GovtAECurr">ce.data.17.GovtAECurr</a>.<br/>
-    Download files individually, or use this command to download the entire directory:
-    </p>
-    <code>wget -r ftp://ftp.bls.gov/pub/time.series/ce</code>
-    <p>
-    Drag and drop files onto this page to load a table for that dataset.
+      Drag and drop <strong>ce.data</strong> files downloaded from <a href="ftp://ftp.bls.gov/pub/time.series/ce">here</a>.<br/>
+      <a href="ftp://ftp.bls.gov/pub/time.series/ce/ce.txt">Description</a> of the dataset.
     </p>
   </div>
 </div>
@@ -157,34 +168,20 @@ function create_table(raw_data, name) {
   /**************
   * Readout
   **************/
-
   d3.select("#content")
     .append("h2")
     .text(name);
 
-  var table = d3.select("#content")
-    .append("table")
-
-  table.append("tr")
-    .attr("class","fixed")
-    .selectAll("th")
-    .data(columns)
-    .enter().append("th")
-      .text(function(d) { return d; });
-
-  table.selectAll("tr.row")
+  var multiples = d3.select("#content")
+    .selectAll("div")
       .data(series_stats)
-    .enter().append("tr")
-      .attr("class", "row")
-      .selectAll("td")
-      .data(function(d) { return columns.slice(0,6).map(function(key) { return d[key] }) ; })
-      .enter().append("td")
-        .text(function(d) { return d; });
-
-  table.selectAll("tr.row")
+    .enter().append("div")
+      .attr("class", "multiple")
+      .html(function(d) { return d['industry'] + "<br/>"; })
       .each(function(d,i,j) {
-        d3.select(this).data([series_data[d.series_id]]).call(horizon_sparkchart);
+        d3.select(this).data([series_data[d.series_id]]).call(sparkchart);
       });
+
 };
 });
 });
