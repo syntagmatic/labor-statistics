@@ -150,10 +150,8 @@ function create_table(raw_data, name) {
   var series_keys = [
     "series_id",
     "supersector_code",
-    "supersector",
     "datatype",
     "industry_code",
-    "industry",
     "observations",
     "begin_year",
     "end_year",
@@ -161,15 +159,12 @@ function create_table(raw_data, name) {
     "end_period"
   ];
 
-  series_stats = _(series_data).chain()
-    .keys()
+  series_stats = _(_.shuffle(_.keys(series_data)).slice(0,250)).chain()
     .map(function(k) {
       return [
         k,
         series[k].supersector_code,
-        series[k].supersector_code,
         series[k].data_type_code,
-        series[k].industry_code,
         series[k].industry_code,
         series_data[k].length,
         series[k].begin_year,
@@ -178,10 +173,8 @@ function create_table(raw_data, name) {
         series[k].end_period,
       ]
     })
-    .sortBy(function(d) { return d[6]; })
+    .sortBy(function(d) { return d[4]; })
     .value();
-
-  series_stats = series_stats.slice(0,250);
 
   /**************
   * Readout
@@ -200,7 +193,7 @@ function create_table(raw_data, name) {
     .enter().append("div")
       .attr("class", "multiple")
       .style("width", function(d) { return series_data[d[0]].length + "px"; })
-      .html(function(d) { return industries[d[5]] + "<br/>"; })
+      .html(function(d) { return industries[d[3]] + "<br/>"; })
       .each(function(d,i,j) {
          d3.select(this).data([series_data[d[0]]]).call(sparkchart_canvas);
       });
