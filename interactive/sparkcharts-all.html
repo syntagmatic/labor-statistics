@@ -1,0 +1,211 @@
+<!doctype html>
+<style>
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: 16px sans-serif;
+  line-height: 1.3em;
+}
+
+#content {
+  margin: 0 20px;
+}
+
+.loading-msg {
+  font-weight: bold;
+}
+
+.rule line,
+.yrule line {
+  stroke: #eee;
+  shape-rendering: crispEdges;
+}
+
+.rule line.axis,
+.yrule line.axis {
+  stroke: #000;
+}
+
+.line {
+  fill: none;
+  stroke: #368;
+  stroke-width: 1px;
+}
+
+.multiple:hover .line {
+}
+
+circle.line {
+  fill: #fff;
+}
+
+.intro {
+  background: #f3f3f3;
+  border: 1px solid #d0d0d0;
+  padding: 0 12px;
+}
+
+.multiple { 
+  float: left;
+  font-size: 10px;
+  line-height: 11px;
+  padding: 0 24px 36px 0;
+  color: #222;
+  width: 140px;
+  height: 56px;
+  position: relative;
+  font-weight: bold;
+}
+
+.multiple:hover {
+}
+
+.multiple canvas,
+.multiple svg{
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+</style>
+<script src="lib/underscore.js"></script>
+<script src="lib/underscore.math.js"></script>
+<script src="lib/underscore.string.js"></script>
+<script src="lib/d3.v2.js"></script>
+<script src="lib/queue.js"></script>
+<script src="js/sparkchart.js"></script>
+<script src="js/utils.js"></script>
+<body>
+<div id="content">
+  <h1>Sparkchart Grid</h1>
+  <div class="intro">
+    <p>
+      Drag and drop <strong>ce.data</strong> files downloaded from <a href="ftp://ftp.bls.gov/pub/time.series/ce">here</a>.<br/>
+      <a href="ftp://ftp.bls.gov/pub/time.series/ce/ce.txt">Description</a> of the dataset.
+    </p>
+  </div>
+</div>
+</body>
+<script>
+var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+d3.json("../time.series/schema.json", function(schemas) {
+  function load_codes_and_create_table(raw_data, filename) {
+    var data = utils.trim_table(raw_data);
+    var db = filename.slice(0,2);
+
+    var q = queue();
+    var codes = schemas[db].codes;
+    codes.push("series")
+
+    _(codes).each(function(code) {
+      q.defer(load_tsv("../data/ftp.bls.gov/pub/time.series/" + db + "/" + db + "." + code.replace("_","")));
+    });
+    q.await(function(error, results) {
+      var lookups = {};
+      _(codes).each(function(code,i) {
+        _(results[i]).each(function(d) {
+          if (code == 'data_type') {
+            var name = code + '_code';
+            lookups[name] = name in lookups ? lookups[name] : {};
+            lookups[name][d[name]] = _.str.trim(d[code + '_text']);
+            return;
+          }
+          if (code == 'series') {
+            var name = 'series_id';
+            lookups[name] = name in lookups ? lookups[name] : {};
+            lookups[name][_.str.trim(d[name])] = d;
+            return;
+          }
+          var name = code + '_code';
+          lookups[name] = name in lookups ? lookups[name] : {};
+          lookups[name][d[name]] = _.str.trim(d[code + '_name']);
+        });
+      });
+      create_table(data, filename, lookups);
+    });
+  };
+
+  utils.upload_tsv(load_codes_and_create_table);
+});
+
+d3.select("#uploader").attr("disabled", null);
+
+function load_tsv(tsv) {
+  return function(callback) {
+    function callback_tsv(data) {
+      return callback(null, data);
+    };
+    d3.tsv(tsv, callback_tsv);
+  };
+};
+
+function create_table(data, name, lookups) {
+
+  /**************
+  * Preprocessing
+  **************/
+
+  series_data = d3.nest()
+    .key(function(d) { return d['series_id']; })
+    .rollup(function(arr) {
+      return arr.map(function(d) {
+        return {
+          period: d.period,    
+          value: d.value,    
+          year: d.year, 
+        };
+      });
+    })
+    .map(data);
+
+  /**************
+  * Stats
+  **************/
+
+  var series_keys = [
+    "begin_year",
+    "end_year",
+    "begin_period",
+    "end_period",
+  ].concat(_(lookups).keys());
+
+  series_stats = _(_.shuffle(_.keys(series_data)).slice(0,250)).chain()
+    .map(function(k) {
+      var data = {};
+      _(series_keys).each(function(key) { 
+        data[key] = _.str.trim(lookups.series_id[k][key]);
+      });
+      return data;
+    })
+    .sortBy(function(d) { return d[4]; })
+    .value();
+
+  /**************
+  * Readout
+  **************/
+
+  d3.select("#content")
+    .append("h2")
+    .text(name);
+
+  var table = d3.select("#content")
+    .append("div");
+
+  var multiples = table
+    .selectAll("div")
+      .data(series_stats)
+    .enter().append("div")
+      .attr("class", "multiple")
+      .style("width", function(d) { return series_data[d['series_id']].length + "px"; })
+      //.html(function(d) { return lookups.industry_code[d[3]] + "<br/>"; })
+      .each(function(d,i,j) {
+         d3.select(this).data([series_data[d['series_id']]]).call(sparkchart_canvas);
+      });
+
+};
+</script>
