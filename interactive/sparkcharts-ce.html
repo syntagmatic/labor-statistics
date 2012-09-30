@@ -38,7 +38,6 @@ body {
 }
 
 .multiple:hover .line {
-  stroke: #821;
 }
 
 circle.line {
@@ -55,27 +54,19 @@ circle.line {
   float: left;
   font-size: 10px;
   line-height: 11px;
-  padding: 0 18px 18px 0;
-  color: #fff;
+  padding: 0 24px 36px 0;
+  color: #222;
   width: 140px;
-  height: 36px;
+  height: 56px;
   position: relative;
   font-weight: bold;
-  transition: color 1.5s linear 1s;
-  -moz-transition: color 1.5s linear 1s; /* Firefox 4 */
-  -webkit-transition: color 1.5s linear 1s; /* Safari and Chrome */
-  -o-transition: color 1.5s linear 1s; /* Opera */
 }
 
 .multiple:hover {
-  color: #444;
-  transition: color 0s;
-  -moz-transition: color 0s; /* Firefox 4 */
-  -webkit-transition: color 0s; /* Safari and Chrome */
-  -o-transition: color 0s; /* Opera */
 }
 
-.multiple svg {
+.multiple canvas,
+.multiple svg{
   position: absolute;
   top: 0;
   left: 0;
@@ -156,43 +147,62 @@ function create_table(raw_data, name) {
   * Stats
   **************/
 
+  var series_keys = [
+    "series_id",
+    "supersector_code",
+    "supersector",
+    "datatype",
+    "industry_code",
+    "industry",
+    "observations",
+    "begin_year",
+    "end_year",
+    "begin_period",
+    "end_period"
+  ];
+
   series_stats = _(series_data).chain()
     .keys()
     .map(function(k) {
-      return {
-        series_id: k,
-        //supersector_code: series[k].supersector_code,
-        supersector: supersectors[series[k].supersector_code],
-        datatype: datatypes[series[k].data_type_code],
-        //industry_code: series[k].industry_code,
-        industry: industries[series[k].industry_code],
-        observations: series_data[k].length,
-        begin_year: series[k].begin_year,
-        end_year: series[k].end_year,
-        //begin_period: series[k].begin_period,
-        //end_period: series[k].end_period,
-      }
+      return [
+        k,
+        series[k].supersector_code,
+        series[k].supersector_code,
+        series[k].data_type_code,
+        series[k].industry_code,
+        series[k].industry_code,
+        series_data[k].length,
+        series[k].begin_year,
+        series[k].end_year,
+        series[k].begin_period,
+        series[k].end_period,
+      ]
     })
-    .sortBy(function(d) { return -d.length })
+    .sortBy(function(d) { return d[6]; })
     .value();
 
-  var series_keys = _.keys(series_stats[0]);
+  series_stats = series_stats.slice(0,250);
 
   /**************
   * Readout
   **************/
+
   d3.select("#content")
     .append("h2")
     .text(name);
 
-  var multiples = d3.select("#content")
+  var table = d3.select("#content")
+    .append("div");
+
+  var multiples = table
     .selectAll("div")
       .data(series_stats)
     .enter().append("div")
       .attr("class", "multiple")
-      .html(function(d) { return d['industry'] + "<br/>"; })
+      .style("width", function(d) { return series_data[d[0]].length + "px"; })
+      .html(function(d) { return industries[d[5]] + "<br/>"; })
       .each(function(d,i,j) {
-        d3.select(this).data([series_data[d.series_id]]).call(sparkchart);
+         d3.select(this).data([series_data[d[0]]]).call(sparkchart_canvas);
       });
 
 };

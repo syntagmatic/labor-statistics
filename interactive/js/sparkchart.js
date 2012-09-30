@@ -16,6 +16,8 @@ function sparkchart(selection) {
   xscale.domain([0, data.length-1]);
   yscale.domain([d3.min(_.pluck(data, 'value')), d3.max(_.pluck(data, 'value'))]);
 
+  selection.style("width", width + "px");
+
   var svg = selection.append("svg")
       .attr("width", width + margin.left + margin.right)
       .attr("height", height + margin.top + margin.bottom)
@@ -29,30 +31,42 @@ function sparkchart(selection) {
       .y(function(d) { return yscale(d.value); }));
 };
 
+function sparkchart_canvas(selection) {
+  var data = selection.data()[0].map(function(d) {
+    return {
+      value: parseFloat(d.value),
+      period: d.period,
+      year: parseInt(d.year)
+    }
+  });
+
+  var margin = {top: 1, right: 1, bottom: 2, left: 1},
+      width = data.length,
+      height = 56 - margin.top - margin.bottom,
+      xscale = d3.scale.linear().range([margin.left,width]),
+      yscale = d3.scale.linear().range([height,margin.top]);
+
+  xscale.domain([0, data.length-1]);
+  yscale.domain([d3.min(_.pluck(data, 'value')), d3.max(_.pluck(data, 'value'))]);
+
+  var canvas = selection.append("canvas")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)[0][0];
+  var ctx = canvas.getContext("2d");
+
+  ctx.strokeStyle = "#368";
+  ctx.beginPath
+  _(data).each(function(d,i) {
+    if (i == 0) ctx.moveTo(xscale(i), yscale(d.value));
+    ctx.lineTo(xscale(i), yscale(d.value));
+  });
+  ctx.stroke();
+  /*
+  _(data).each(function(d,i) {
+    ctx.fillRect(xscale(i), yscale(d.value), 1, 1);
+  });
+  */
+};
+
 function horizon_sparkchart(selection) {
 };
-
-/* Looping */
-
-function render() {
-  var i = Math.min(queue.length, 12);
-  while (i-- > 0) {
-    queue.pop()();
-  }
-};
-
-window.requestAnimFrame =   window.requestAnimationFrame || 
-  window.webkitRequestAnimationFrame || 
-  window.mozRequestAnimationFrame    || 
-  window.oRequestAnimationFrame      || 
-  window.msRequestAnimationFrame     || 
-  function(/* function */ callback, /* DOMElement */ element){
-    window.setTimeout(callback, 16);
-  };
-
-function startLoop() {
-  (function animloop(){
-    requestAnimFrame(animloop);
-    render();
-  })();
-}
