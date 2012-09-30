@@ -141,6 +141,15 @@ function create_table(raw_data, name) {
 
   series_data = d3.nest()
     .key(function(d) { return d['series_id']; })
+    .rollup(function(arr) {
+      return arr.map(function(d) {
+        return {
+          period: d.period,    
+          value: d.value,    
+          year: d.year, 
+        };
+      });
+    })
     .map(data);
 
   /**************
@@ -156,7 +165,9 @@ function create_table(raw_data, name) {
     "begin_year",
     "end_year",
     "begin_period",
-    "end_period"
+    "end_period",
+    "supersector",
+    "industry"
   ];
 
   series_stats = _(_.shuffle(_.keys(series_data)).slice(0,250)).chain()
@@ -171,6 +182,8 @@ function create_table(raw_data, name) {
         series[k].end_year,
         series[k].begin_period,
         series[k].end_period,
+        supersectors[series[k].supersector_code],
+        industries[series[k].industry_code]
       ]
     })
     .sortBy(function(d) { return d[4]; })
