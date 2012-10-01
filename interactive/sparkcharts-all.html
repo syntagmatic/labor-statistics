@@ -55,7 +55,7 @@ circle.line {
   font-size: 10px;
   line-height: 11px;
   padding: 0 24px 36px 0;
-  color: #222;
+  color: transparent;
   width: 140px;
   height: 56px;
   position: relative;
@@ -63,10 +63,12 @@ circle.line {
 }
 
 .multiple:hover {
+  color: #1a1a1a;
 }
 
 .multiple canvas,
 .multiple svg{
+  pointer-events: none;
   position: absolute;
   top: 0;
   left: 0;
@@ -106,7 +108,7 @@ d3.json("../time.series/schema.json", function(schemas) {
       q.defer(load_tsv("../data/ftp.bls.gov/pub/time.series/" + db + "/" + db + "." + code.replace("_","")));
     });
     q.await(function(error, results) {
-      var lookups = {};
+      lookups = {};
       _(codes).each(function(code,i) {
         _(results[i]).each(function(d) {
           if (code == 'data_type') {
@@ -170,11 +172,14 @@ function create_table(data, name, lookups) {
   var series_keys = [
     "begin_year",
     "end_year",
-    "begin_period",
-    "end_period",
+    //"begin_period",
+    //"end_period",
   ].concat(_(lookups).keys());
 
-  series_stats = _(_.shuffle(_.keys(series_data)).slice(0,250)).chain()
+
+  var subset = _.shuffle(_.keys(series_data)).slice(0,250);
+
+  series_stats = _(subset).chain()
     .map(function(k) {
       var data = {};
       _(series_keys).each(function(key) { 
@@ -202,7 +207,19 @@ function create_table(data, name, lookups) {
     .enter().append("div")
       .attr("class", "multiple")
       .style("width", function(d) { return series_data[d['series_id']].length + "px"; })
-      //.html(function(d) { return lookups.industry_code[d[3]] + "<br/>"; })
+      .html(function(d) {
+        var html = "";
+        _(series_keys).each(function(key,i) {
+          html += key + ": ";
+          if (key in lookups && key != "series_id") { 
+            html += lookups[key][d[key]];
+          } else {
+            html += d[key];
+          }
+          html += "<br/>";
+        });
+        return html;
+      })
       .each(function(d,i,j) {
          d3.select(this).data([series_data[d['series_id']]]).call(sparkchart_canvas);
       });
