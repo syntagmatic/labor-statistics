@@ -8,13 +8,14 @@ utils.date_value = function(data) {
       return _(months).map(function(month,j) {
         return {
           date: (new Date(year, months.indexOf(month))).getTime(),
-          value: data[i][month]
+          value: parseFloat(data[i][month])
         }
       });
     })
     .flatten()
     .reject(function(d) {
-      return d.value == " ";
+      return d.value == " " ||
+             _.isNaN(d.value);
     })
     .value();
 };
