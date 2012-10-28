@@ -45,9 +45,11 @@ function sparkchart_canvas(selection) {
       height = 56 - margin.top - margin.bottom,
       xscale = d3.scale.linear().range([margin.left,width]),
       yscale = d3.scale.linear().range([height,margin.top]);
+  var max = d3.max(_.pluck(data, 'value'));
+  var min = d3.min(_.pluck(data, 'value'));
 
   xscale.domain([0, data.length-1]);
-  yscale.domain([d3.min(_.pluck(data, 'value')), d3.max(_.pluck(data, 'value'))]);
+  yscale.domain([0, max]);
 
   var canvas = selection.append("canvas")
       .attr("width", width + margin.left + margin.right)
@@ -55,9 +57,10 @@ function sparkchart_canvas(selection) {
   var ctx = canvas.getContext("2d");
 
   ctx.strokeStyle = "#368";
+  ctx.strokeWdith= "1px";
   ctx.beginPath
   _(data).each(function(d,i) {
-    if (i == 0) ctx.moveTo(xscale(i), yscale(d.value));
+    ctx.moveTo(xscale(i), yscale(0));
     ctx.lineTo(xscale(i), yscale(d.value));
   });
   ctx.stroke();
