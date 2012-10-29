@@ -5,10 +5,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-}
-
-body {
-  font: 16px sans-serif;
+  font: 10px sans-serif;
   line-height: 1.3em;
 }
 
@@ -46,10 +43,10 @@ body {
 .multiple { 
   float: right;
   clear: both;
-  font-size: 13px;
+  font-size: 10px;
   line-height: 11px;
   width: 100%;
-  height: 20px;
+  height: 18px;
   position: relative;
 }
 .multiple .begin,
@@ -194,7 +191,12 @@ function create_table(data, name, lookups) {
     .map(function(k) {
       var data = {};
       _(series_keys).each(function(key) { 
-        data[key] = _.str.trim(lookups.series_id[k][key]);
+        // lookup code ids
+        if (key.indexOf("code") != -1) {
+          data[key] = lookups[key][_.str.trim(lookups.series_id[k][key])];
+        } else {
+          data[key] = _.str.trim(lookups.series_id[k][key]);
+        }
       });
       data.min = d3.min(series_data[data.series_id], function(d) { return d.value });
       data.max = d3.max(series_data[data.series_id], function(d) { return d.value });
@@ -210,7 +212,6 @@ function create_table(data, name, lookups) {
   d3.select("#content")
     .append("h2")
     .text(name);
-    console.log(series_keys);
 
   var table = d3.select("#content")
     .append("table")
@@ -255,7 +256,7 @@ function horizon_sparkchart(selection) {
 
   var margin = {top: 1, right: 1, bottom: 2, left: 1},
       width = data.length,
-      height = 20 - margin.top - margin.bottom,
+      height = 18 - margin.top - margin.bottom,
       xscale = d3.scale.linear().range([margin.left,width]),
       yscale = d3.scale.linear().range([height,-height]);
 
@@ -270,7 +271,7 @@ function horizon_sparkchart(selection) {
     .height(height)
     .x(function(d) { return xscale(d.year); })
     .y(function(d) { return yscale(d.diff); })
-    .bands(1)
+    .bands(3)
     .mode("mirror")
     .interpolate("basis");
 
