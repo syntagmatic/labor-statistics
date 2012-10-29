@@ -97,10 +97,36 @@ html, body {
     <p>
       Drag and drop any <strong>*.data</strong> files downloaded from <a href="ftp://ftp.bls.gov/pub/time.series">here</a>.<br/>
     </p>
+    <p>
+      <a href="#" id="horizon_toggle">Horizon Charts</a> | 
+      <a href="#" id="spark_toggle">Spark Charts</a> | 
+      <a href="#" id="spark_area_toggle">Area Spark Charts</a>
+    <p>
   </div>
 </div>
 </body>
 <script>
+d3.select("#horizon_toggle")
+  .on("click", function() {
+    d3.selectAll(".sparkchart")
+      .each(function(d,i) {
+        d3.select(this).html("").call(horizon_sparkchart);
+      })
+  });
+d3.select("#spark_toggle")
+  .on("click", function() {
+    d3.selectAll(".sparkchart")
+      .each(function(d,i) {
+        d3.select(this).html("").call(sparkchart_canvas);
+      })
+  });
+d3.select("#spark_area_toggle")
+  .on("click", function() {
+    d3.selectAll(".sparkchart")
+      .each(function(d,i) {
+        d3.select(this).html("").call(sparkchart_canvas_area);
+      })
+  });
 var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 d3.json("../time.series/schema.json", function(schemas) {
@@ -233,8 +259,10 @@ function create_table(data, name, lookups) {
         .text(function(d) { return d; });
 
   table.selectAll("tr.row")
+      .append("td")
+      .attr("class", "sparkchart")
       .each(function(d,i,j) {
-        d3.select(this).data([series_data[d.series_id]]).call(horizon_sparkchart);
+        d3.select(this).data([series_data[d.series_id]]).call(sparkchart_canvas);
       });
 };
 
