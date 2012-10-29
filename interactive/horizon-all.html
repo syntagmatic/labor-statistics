@@ -90,6 +90,7 @@ body {
 <script src="lib/d3.v2.js"></script>
 <script src="lib/horizon.js"></script>
 <script src="lib/queue.js"></script>
+<script src="lib/render-queue.js"></script>
 <script src="js/utils.js"></script>
 <script src="js/sparkchart.js"></script>
 <body>
@@ -97,8 +98,7 @@ body {
   <h1>Sparkchart Grid</h1>
   <div class="intro">
     <p>
-      Drag and drop <strong>ce.data</strong> files downloaded from <a href="ftp://ftp.bls.gov/pub/time.series/ce">here</a>.<br/>
-      <a href="ftp://ftp.bls.gov/pub/time.series/ce/ce.txt">Description</a> of the dataset.
+      Drag and drop any <strong>*.data</strong> files downloaded from <a href="ftp://ftp.bls.gov/pub/time.series">here</a>.<br/>
     </p>
   </div>
 </div>
@@ -186,7 +186,7 @@ function create_table(data, name, lookups) {
     "begin_period",
     //"end_period",
   ].concat(_(lookups).keys());
-
+  series_keys.push("sparkchart");
 
   var subset = _.shuffle(_.keys(series_data)).slice(0,2000);
 
@@ -210,37 +210,31 @@ function create_table(data, name, lookups) {
   d3.select("#content")
     .append("h2")
     .text(name);
+    console.log(series_keys);
 
   var table = d3.select("#content")
-    .append("div");
+    .append("table")
 
-  var multiples = table
-    .selectAll("div")
+  table.append("tr")
+    .attr("class","fixed")
+    .selectAll("th")
+    .data(series_keys)
+    .enter().append("th")
+      .text(function(d) { return d; });
+
+  table.selectAll("tr.row")
       .data(series_stats)
-    .enter().append("div")
-      .attr("class", "multiple");
+    .enter().append("tr")
+      .attr("class", "row")
+      .selectAll("td")
+      .data(function(d) { return series_keys.slice(0,-1).map(function(key) { return d[key] }) ; })
+      .enter().append("td")
+        .text(function(d) { return d; });
 
-  multiples
+  table.selectAll("tr.row")
       .each(function(d,i,j) {
-        var selection = d3.select(this);
-        function plot() {
-          // end year
-          selection
-            .append("span")
-            .attr("class", "end")
-            .text(d['end_year']);
-          // horizon chart
-          selection.data([series_data[d['series_id']]]).call(horizon_sparkchart);
-          // begin year
-          selection
-            .append("span")
-            .attr("class", "begin")
-            .text(d['begin_year']);
-        };
-        setTimeout(plot, 28*i);
+        d3.select(this).data([series_data[d.series_id]]).call(horizon_sparkchart);
       });
-
-
 };
 
 
@@ -260,7 +254,7 @@ function horizon_sparkchart(selection) {
   });
 
   var margin = {top: 1, right: 1, bottom: 2, left: 1},
-      width = 2*data.length,
+      width = data.length,
       height = 20 - margin.top - margin.bottom,
       xscale = d3.scale.linear().range([margin.left,width]),
       yscale = d3.scale.linear().range([height,-height]);
@@ -276,8 +270,8 @@ function horizon_sparkchart(selection) {
     .height(height)
     .x(function(d) { return xscale(d.year); })
     .y(function(d) { return yscale(d.diff); })
-    .bands(6)
-    .mode("offset")
+    .bands(1)
+    .mode("mirror")
     .interpolate("basis");
 
   var svg = selection.append("svg")
