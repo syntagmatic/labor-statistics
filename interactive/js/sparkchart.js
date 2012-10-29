@@ -71,5 +71,3 @@ function sparkchart_canvas(selection) {
   */
 };
 
-function horizon_sparkchart(selection) {
-};
