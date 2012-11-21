@@ -20,6 +20,8 @@ utils.date_value = function(data) {
     .value();
 };
 
+// removes whitespace for values of objects in a collection
+// returns an array of objects
 utils.trim_table = function(table) { 
   return _(table).map(function(d) { 
     for (k in d)
